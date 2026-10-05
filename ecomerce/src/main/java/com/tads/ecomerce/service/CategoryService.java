@@ -55,4 +55,14 @@ public class CategoryService {
 
         }
     }
+    public CategoryDTO delete(long id) {
+        try{
+            Optional<Category> obj = repository.findById(id);
+            Category entity = obj.get();
+            repository.delete(entity);
+            return new CategoryDTO(entity);
+        }catch(EntityNotFoundException e){
+            throw new ResourceNotFoundException("id not Found!" + id);
+        }
+    }
 }
