@@ -6,6 +6,8 @@ import com.tads.ecomerce.repository.CategoryRepository;
 import com.tads.ecomerce.service.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +66,12 @@ public class CategoryService {
         }catch(EntityNotFoundException e){
             throw new ResourceNotFoundException("id not Found!" + id);
         }
+    }
+    @Transactional(readOnly = true)
+    public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+        Page<Category> list = repository.findAll(pageRequest);
+
+        return list.map(x -> new CategoryDTO(x));
+
     }
 }
