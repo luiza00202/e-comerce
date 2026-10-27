@@ -1,3 +1,3 @@
-insert into categoria (name) values ('ebooks');
-insert into categoria (name) values ('eletronics');
-insert into categoria (name) values ('computers');
+insert into categoria (name, created_At) values ('ebooks', NOW());
+insert into categoria (name, created_At) values ('eletronics', NOW());
+insert into categoria (name, created_At) values ('computers', NOW());
